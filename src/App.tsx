@@ -155,9 +155,10 @@ export default function App() {
   };
 
 const handleDeleteInmate = (id: string) => {
-    if (confirm('Deseja mover para o Arquivo Morto?')) {
+    if (confirm('Deseja mover este sentenciado para o Arquivo Morto?')) {
       const updated = inmates.map(i => i.id === id ? { ...i, arquivado: true } : i);
       setInmates(updated);
+      // Salva usando sua função de segurança
       localStorage.setItem(STORAGE_KEY_INMATES, obfuscate(updated));
     }
   };
