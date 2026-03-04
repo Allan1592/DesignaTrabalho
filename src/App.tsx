@@ -22,7 +22,7 @@ import {
   AlertTriangle,
   ShieldAlert
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Inmate, Company, ViewType, Designation } from './types';
 import { InmateForm } from './components/InmateForm';
 import { CompanyForm } from './components/CompanyForm';
@@ -154,29 +154,13 @@ export default function App() {
     setEditingInmate(undefined);
   };
 
-  // Localize essa função no seu App.tsx e substitua:
 const handleDeleteInmate = (id: string) => {
-  if (confirm('Deseja mover este sentenciado para o Arquivo Morto?')) {
-    // 1. Mapeamos a lista para trocar o status de arquivado
-    const updatedInmates = inmates.map(i => 
-      i.id === id ? { ...i, arquivado: true } : i
-    );
-
-    // 2. Atualizamos o estado do React
-    setInmates(updatedInmates);
-
-    // 3. Forçamos o salvamento imediato com a sua função de ofuscação
-    // Isso garante que o F5 não traga o preso de volta
-    localStorage.setItem(STORAGE_KEY_INMATES, obfuscate(updatedInmates));
-    
-    // 4. Limpamos a seleção se ele estiver selecionado
-    setSelectedInmateIds(prev => {
-      const next = new Set(prev);
-      next.delete(id);
-      return next;
-    });
-  }
-};
+    if (confirm('Deseja mover para o Arquivo Morto?')) {
+      const updated = inmates.map(i => i.id === id ? { ...i, arquivado: true } : i);
+      setInmates(updated);
+      localStorage.setItem(STORAGE_KEY_INMATES, obfuscate(updated));
+    }
+  };
 
   const handleSaveCompany = (data: Partial<Company>) => {
     if (editingCompany) {
