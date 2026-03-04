@@ -1,0 +1,5 @@
+{
+  "name": "Sistema de Designação de Trabalho",
+  "description": "Sistema para gestão e designação de trabalho de sentenciados, com geração de PDF e controle de arquivo morto.",
+  "requestFramePermissions": []
+}
