@@ -7,7 +7,7 @@ import { VitePWA } from 'vite-plugin-pwa';
 export default defineConfig(({mode}) => {
   const env = loadEnv(mode, '.', '');
   return {
-    base: mode === 'production' ? '/sistema-designacao/' : '/',
+    base: mode === 'production' ? '/DesignaTrabalho/' : '/',
     plugins: [
       react(), 
       tailwindcss(),
