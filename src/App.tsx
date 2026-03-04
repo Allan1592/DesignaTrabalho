@@ -155,8 +155,21 @@ export default function App() {
   };
 
   const handleDeleteInmate = (id: string) => {
-    if (confirm('Tem certeza que deseja excluir este sentenciado?')) {
-      setInmates(inmates.filter(i => i.id !== id));
+    // 1. Mudamos a pergunta para o usuário entender que vai para o arquivo
+    if (confirm('Deseja mover este sentenciado para o Arquivo Morto?')) {
+      
+      // 2. Criamos a lista atualizada mudando o campo 'arquivado' para true
+      const updatedInmates = inmates.map(i => 
+        i.id === id ? { ...i, arquivado: true } : i
+      );
+
+      // 3. Atualizamos o estado
+      setInmates(updatedInmates);
+
+      // 4. FORÇAMOS o salvamento ofuscado na hora (Vacina contra o F5)
+      localStorage.setItem(STORAGE_KEY_INMATES, obfuscate(updatedInmates));
+
+      // 5. Limpamos seleção
       const newSelected = new Set(selectedInmateIds);
       newSelected.delete(id);
       setSelectedInmateIds(newSelected);
